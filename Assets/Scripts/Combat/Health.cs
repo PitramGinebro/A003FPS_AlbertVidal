@@ -7,8 +7,12 @@ public class Health : MonoBehaviour, IDamageable
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool destroyOnDeath = true;
     [SerializeField] private float destroyDelay = 0f;
+    [Tooltip("Vida infinita: recibe los impactos (eventos, hitmarker) pero nunca pierde vida.")]
+    [SerializeField] private bool infiniteHealth;
 
     public UnityEvent<float> onDamaged;
+    /// <summary>Se lanza cuando cualquier Health recibe daño (para hitmarkers, estadísticas...).</summary>
+    public static event System.Action<Health, DamageInfo> AnyDamaged;
     public UnityEvent onDied;
 
     public float Current { get; private set; }
@@ -21,8 +25,9 @@ public class Health : MonoBehaviour, IDamageable
     {
         if (IsDead || damage.Amount <= 0f) return;
 
-        Current = Mathf.Max(0f, Current - damage.Amount);
+        if (!infiniteHealth) Current = Mathf.Max(0f, Current - damage.Amount);
         onDamaged?.Invoke(damage.Amount);
+        AnyDamaged?.Invoke(this, damage);
 
         if (IsDead)
         {

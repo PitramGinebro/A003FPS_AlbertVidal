@@ -86,12 +86,13 @@ MonoBehaviour:
   weaponKickBack: 0.02
   weaponKickPitch: 1.5
   swayMultiplier: 1
-  fireSounds: []
+  fireSounds:
+  - {fileID: 8300000, guid: 3b9d5e72a1c84f06b7e2d9a4c6f1e822, type: 3}
   fireVolume: 1
   firePitchVariation: 0.05
   dryFireSound: {fileID: 0}
   equipSound: {fileID: 0}
-  reloadSound: {fileID: 0}
+  reloadSound: {fileID: 8300000, guid: 7c3e1a90b54d4f2e9a1d6b8f2c4e0a11, type: 3}
   muzzleFlashPrefab: {fileID: 0}
   muzzleFlashLifetime: 1
   impactEffectPrefab: {fileID: 0}
